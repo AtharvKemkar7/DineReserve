@@ -1,0 +1,25 @@
+<h1 class="page-title">Make a reservation</h1>
+<form class="form" [formGroup]="form" (ngSubmit)="submit()">
+  <label>Date
+    <input type="date" formControlName="reservationDate" (change)="check()">
+  </label>
+  <label>Start time
+    <input type="time" formControlName="startTime" (change)="check()">
+  </label>
+  <label>Number of guests
+    <input type="number" min="1" formControlName="guestCount" (change)="check()">
+  </label>
+  <label>Preferred table
+    <select formControlName="preferredTableId">
+      <option value="">Any available table</option>
+      <option *ngFor="let table of availability?.availableTables" [value]="table.id">
+        {{ table.tableNumber }} - {{ table.name }} ({{ table.capacity }})
+      </option>
+    </select>
+  </label>
+  <label>Special request
+    <textarea formControlName="specialRequest" placeholder="Birthday, window seat, high chair..."></textarea>
+  </label>
+  <p class="error" *ngIf="error">{{ error }}</p>
+  <button class="btn" type="submit" [disabled]="loading">{{ loading ? 'Booking...' : 'Book table' }}</button>
+</form>

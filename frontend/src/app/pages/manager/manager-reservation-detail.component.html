@@ -1,0 +1,38 @@
+<a routerLink="/manager/today">Back</a>
+<h1 class="page-title" *ngIf="reservation">{{ reservation.reservationNumber }}</h1>
+<p class="error" *ngIf="error">{{ error }}</p>
+<p class="ok" *ngIf="message">{{ message }}</p>
+<section class="card" *ngIf="reservation">
+  <p><span class="badge" [class]="reservation.status">{{ reservation.status }}</span></p>
+  <p>{{ reservation.customerName }} ({{ reservation.customerEmail }})</p>
+  <p>{{ reservation.reservationDate }} {{ reservation.startTime }}-{{ reservation.endTime }}</p>
+  <p>{{ reservation.guestCount }} guests</p>
+  <p>Special request: {{ reservation.specialRequest || 'None' }}</p>
+  <p>Assigned table: {{ reservation.tableNumber || 'None' }}</p>
+  <div class="row-actions">
+    <button class="btn" type="button" (click)="act('checkIn')">Check in</button>
+    <button class="btn secondary" type="button" (click)="act('complete')">Complete</button>
+    <button class="btn ghost" type="button" (click)="act('noShow')">No-show</button>
+    <button class="btn danger" type="button" (click)="act('cancel')">Cancel</button>
+  </div>
+</section>
+<section class="card" style="margin-top:16px" *ngIf="reservation">
+  <h3>Assign table</h3>
+  <form class="form" [formGroup]="form" (ngSubmit)="assign()">
+    <label>Table
+      <select formControlName="tableId">
+        <option value="">Select</option>
+        <option *ngFor="let table of tables" [value]="table.id">
+          {{ table.tableNumber }} {{ table.name }} ({{ table.capacity }}, {{ table.status }})
+        </option>
+      </select>
+    </label>
+    <button class="btn" type="submit">Assign</button>
+  </form>
+  <form class="form" [formGroup]="form" (ngSubmit)="saveNote()" style="margin-top:12px">
+    <label>Manager note
+      <textarea formControlName="note"></textarea>
+    </label>
+    <button class="btn secondary" type="submit">Save note</button>
+  </form>
+</section>

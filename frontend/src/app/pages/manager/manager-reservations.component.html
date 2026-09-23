@@ -1,0 +1,28 @@
+<h1 class="page-title">{{ title }}</h1>
+<div class="empty" *ngIf="!reservations.length">No reservations to show.</div>
+<table class="table" *ngIf="reservations.length">
+  <thead>
+    <tr>
+      <th>Number</th>
+      <th>Customer</th>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Guests</th>
+      <th>Table</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of reservations">
+      <td>{{ item.reservationNumber }}</td>
+      <td>{{ item.customerName }}</td>
+      <td>{{ item.reservationDate }}</td>
+      <td>{{ item.startTime }}</td>
+      <td>{{ item.guestCount }}</td>
+      <td>{{ item.tableNumber || '-' }}</td>
+      <td><span class="badge" [class]="item.status">{{ item.status }}</span></td>
+      <td><a [routerLink]="['/manager/reservations', item.id]">Open</a></td>
+    </tr>
+  </tbody>
+</table>

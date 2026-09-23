@@ -1,0 +1,31 @@
+<h1 class="page-title">Availability</h1>
+<form class="form" [formGroup]="form" (ngSubmit)="search()">
+  <label>Date
+    <input type="date" formControlName="date">
+  </label>
+  <label>Preferred time
+    <input type="time" formControlName="startTime">
+  </label>
+  <label>Guests
+    <input type="number" min="1" formControlName="guestCount">
+  </label>
+  <button class="btn" type="submit" [disabled]="loading">{{ loading ? 'Checking...' : 'Check availability' }}</button>
+</form>
+<p class="error" *ngIf="error">{{ error }}</p>
+<section *ngIf="result" class="card" style="margin-top:18px">
+  <h3>{{ result.availableTables.length }} tables for {{ result.guestCount }} guests</h3>
+  <p *ngIf="!result.availableTables.length" class="empty">No tables at the selected time.</p>
+  <ul>
+    <li *ngFor="let table of result.availableTables">
+      Table {{ table.tableNumber }} {{ table.name }} - {{ table.capacity }} seats ({{ table.section }})
+    </li>
+  </ul>
+  <a class="btn" routerLink="/reserve">Continue to reservation</a>
+  <h3>Time slots</h3>
+  <div class="slot-grid">
+    <div class="slot" *ngFor="let slot of result.slots" [class.available]="slot.available" [class.busy]="!slot.available">
+      {{ slot.startTime }}<br>
+      <small>{{ slot.available ? slot.availableTableCount + ' tables' : 'Full' }}</small>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,8 @@
+<h1 class="page-title">Notifications</h1>
+<div class="empty" *ngIf="!items.length">No notifications yet.</div>
+<article class="card" *ngFor="let item of items" style="margin-bottom:12px">
+  <strong>{{ item.title }}</strong>
+  <p>{{ item.message }}</p>
+  <small class="muted">{{ item.createdAt | date:'short' }}</small>
+  <div *ngIf="!item.read"><button class="btn ghost" type="button" (click)="read(item)">Mark read</button></div>
+</article>

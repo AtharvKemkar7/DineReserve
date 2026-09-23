@@ -1,0 +1,8 @@
+<h1 class="page-title">Profile</h1>
+<form class="form" [formGroup]="form" (ngSubmit)="save()">
+  <label>Full name <input formControlName="fullName"></label>
+  <label>Phone <input formControlName="phone"></label>
+  <p class="ok" *ngIf="message">{{ message }}</p>
+  <p class="error" *ngIf="error">{{ error }}</p>
+  <button class="btn" type="submit">Save</button>
+</form>

@@ -1,0 +1,13 @@
+<h1 class="page-title">Manager account</h1>
+<div class="card" *ngFor="let manager of managers" style="margin-bottom:12px">
+  <p>{{ manager.fullName }} - {{ manager.email }}</p>
+</div>
+<form class="form" [formGroup]="form" (ngSubmit)="save()">
+  <label>Email <input formControlName="email"></label>
+  <label>Password <input type="password" formControlName="password"></label>
+  <label>Full name <input formControlName="fullName"></label>
+  <label>Phone <input formControlName="phone"></label>
+  <p class="ok" *ngIf="message">{{ message }}</p>
+  <p class="error" *ngIf="error">{{ error }}</p>
+  <button class="btn" type="submit">Save manager</button>
+</form>

@@ -1,0 +1,21 @@
+<section class="hero" *ngIf="restaurant">
+  <h1 class="page-title">{{ restaurant.name }}</h1>
+  <p>{{ restaurant.description }}</p>
+  <a class="btn" routerLink="/reserve">Reserve a table</a>
+</section>
+<p class="error" *ngIf="error">{{ error }}</p>
+<div class="cards" *ngIf="restaurant">
+  <article class="card">
+    <h3>Address</h3>
+    <p>{{ restaurant.address }}</p>
+    <p>{{ restaurant.phone }}</p>
+  </article>
+  <article class="card">
+    <h3>Hours</h3>
+    <p>{{ restaurant.openingHours }}</p>
+  </article>
+  <article class="card">
+    <h3>Reservation policy</h3>
+    <p>{{ restaurant.reservationPolicy }}</p>
+  </article>
+</div>

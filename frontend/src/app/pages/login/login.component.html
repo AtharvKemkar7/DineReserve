@@ -1,0 +1,18 @@
+<div class="auth-wrap">
+  <section class="card auth-card">
+    <h1>Harbour &amp; Herb</h1>
+    <p class="muted">Sign in to reserve a table.</p>
+    <form class="form" [formGroup]="form" (ngSubmit)="submit()">
+      <label>Email
+        <input type="email" formControlName="email">
+      </label>
+      <label>Password
+        <input type="password" formControlName="password">
+      </label>
+      <p class="error" *ngIf="error">{{ error }}</p>
+      <button class="btn" type="submit" [disabled]="loading">{{ loading ? 'Signing in...' : 'Sign in' }}</button>
+    </form>
+    <p>New guest? <a routerLink="/register">Create an account</a></p>
+    <p class="muted">Demo: guest&#64;harbour.com / guest123, manager&#64;harbour.com / manager123, admin&#64;harbour.com / admin123</p>
+  </section>
+</div>

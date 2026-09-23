@@ -1,0 +1,15 @@
+<h1 class="page-title">Menu</h1>
+<p *ngIf="loading">Loading menu...</p>
+<p class="error" *ngIf="error">{{ error }}</p>
+<section *ngFor="let category of categories" class="card" style="margin-bottom:16px">
+  <h2>{{ category.name }}</h2>
+  <p class="muted">{{ category.description }}</p>
+  <div *ngIf="!category.items?.length" class="empty">No dishes in this category yet.</div>
+  <div *ngFor="let item of category.items" class="menu-row">
+    <div>
+      <strong>{{ item.name }}</strong>
+      <div class="muted">{{ item.description }}</div>
+    </div>
+    <div>{{ item.price | currency }}</div>
+  </div>
+</section>

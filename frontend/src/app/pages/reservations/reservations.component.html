@@ -1,0 +1,26 @@
+<h1 class="page-title">My reservations</h1>
+<p *ngIf="loading">Loading...</p>
+<p class="error" *ngIf="error">{{ error }}</p>
+<div class="empty" *ngIf="!loading && !reservations.length">No reservations yet.</div>
+<table class="table" *ngIf="reservations.length">
+  <thead>
+    <tr>
+      <th>Number</th>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Guests</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of reservations">
+      <td>{{ item.reservationNumber }}</td>
+      <td>{{ item.reservationDate }}</td>
+      <td>{{ item.startTime }}</td>
+      <td>{{ item.guestCount }}</td>
+      <td><span class="badge" [class]="item.status">{{ item.status }}</span></td>
+      <td><a [routerLink]="['/reservations', item.id]">Details</a></td>
+    </tr>
+  </tbody>
+</table>

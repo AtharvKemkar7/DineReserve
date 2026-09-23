@@ -1,0 +1,45 @@
+<div class="layout">
+  <aside class="sidebar">
+    <h1 class="brand">Harbour &amp; Herb</h1>
+    <div class="brand-sub">Table reservations</div>
+    <nav class="nav" *ngIf="auth.hasRole('CUSTOMER')">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+      <a routerLink="/menu" routerLinkActive="active">Menu</a>
+      <a routerLink="/availability" routerLinkActive="active">Availability</a>
+      <a routerLink="/reserve" routerLinkActive="active">Reserve</a>
+      <a routerLink="/reservations" routerLinkActive="active">My reservations</a>
+      <a routerLink="/notifications" routerLinkActive="active">Notifications</a>
+      <a routerLink="/profile" routerLinkActive="active">Profile</a>
+    </nav>
+    <nav class="nav" *ngIf="auth.hasRole('MANAGER')">
+      <a routerLink="/manager" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Dashboard</a>
+      <a routerLink="/manager/today" routerLinkActive="active">Today</a>
+      <a routerLink="/manager/upcoming" routerLinkActive="active">Upcoming</a>
+      <a routerLink="/manager/tables" routerLinkActive="active">Tables</a>
+      <a routerLink="/profile" routerLinkActive="active">Profile</a>
+    </nav>
+    <nav class="nav" *ngIf="auth.hasRole('ADMIN')">
+      <a routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Dashboard</a>
+      <a routerLink="/admin/users" routerLinkActive="active">Users</a>
+      <a routerLink="/admin/manager" routerLinkActive="active">Manager</a>
+      <a routerLink="/admin/restaurant" routerLinkActive="active">Restaurant</a>
+      <a routerLink="/admin/categories" routerLinkActive="active">Categories</a>
+      <a routerLink="/admin/items" routerLinkActive="active">Menu items</a>
+      <a routerLink="/admin/tables" routerLinkActive="active">Tables</a>
+      <a routerLink="/admin/reservations" routerLinkActive="active">Reservations</a>
+      <a routerLink="/admin/audit" routerLinkActive="active">Audit logs</a>
+      <a routerLink="/profile" routerLinkActive="active">Profile</a>
+    </nav>
+    <button class="link" type="button" (click)="auth.logout()">Sign out</button>
+  </aside>
+  <main class="content">
+    <div class="topbar">
+      <div>
+        <div class="muted">Signed in as</div>
+        <strong>{{ auth.user()?.fullName }}</strong>
+      </div>
+      <span class="badge CONFIRMED">{{ auth.user()?.role }}</span>
+    </div>
+    <router-outlet></router-outlet>
+  </main>
+</div>

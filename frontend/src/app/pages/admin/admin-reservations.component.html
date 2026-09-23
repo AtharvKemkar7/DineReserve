@@ -1,0 +1,15 @@
+<h1 class="page-title">All reservations</h1>
+<div class="empty" *ngIf="!reservations.length">No reservations.</div>
+<table class="table" *ngIf="reservations.length">
+  <thead><tr><th>Number</th><th>Customer</th><th>Date</th><th>Time</th><th>Status</th><th>Table</th></tr></thead>
+  <tbody>
+    <tr *ngFor="let item of reservations">
+      <td>{{ item.reservationNumber }}</td>
+      <td>{{ item.customerName }}</td>
+      <td>{{ item.reservationDate }}</td>
+      <td>{{ item.startTime }}</td>
+      <td><span class="badge" [class]="item.status">{{ item.status }}</span></td>
+      <td>{{ item.tableNumber || '-' }}</td>
+    </tr>
+  </tbody>
+</table>

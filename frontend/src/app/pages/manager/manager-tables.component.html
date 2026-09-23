@@ -1,0 +1,22 @@
+<h1 class="page-title">Table operations</h1>
+<p class="muted">Managers operate tables during service. Configuration stays with admin.</p>
+<p class="error" *ngIf="error">{{ error }}</p>
+<table class="table">
+  <thead>
+    <tr><th>Number</th><th>Name</th><th>Capacity</th><th>Section</th><th>Status</th><th></th></tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let table of tables">
+      <td>{{ table.tableNumber }}</td>
+      <td>{{ table.name }}</td>
+      <td>{{ table.capacity }}</td>
+      <td>{{ table.section }}</td>
+      <td><span class="badge" [class]="table.status">{{ table.status }}</span></td>
+      <td class="row-actions">
+        <button class="btn ghost" type="button" (click)="setStatus(table, 'AVAILABLE')">Available</button>
+        <button class="btn ghost" type="button" (click)="setStatus(table, 'OCCUPIED')">Occupied</button>
+        <button class="btn ghost" type="button" (click)="setStatus(table, 'MAINTENANCE')">Maintenance</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

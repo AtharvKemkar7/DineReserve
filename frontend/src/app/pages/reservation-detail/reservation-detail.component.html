@@ -1,0 +1,39 @@
+<a routerLink="/reservations">Back to history</a>
+<h1 class="page-title" *ngIf="reservation">Reservation {{ reservation.reservationNumber }}</h1>
+<p class="error" *ngIf="error">{{ error }}</p>
+<p class="ok" *ngIf="message">{{ message }}</p>
+<section class="card" *ngIf="reservation">
+  <p><span class="badge" [class]="reservation.status">{{ reservation.status }}</span></p>
+  <p>{{ reservation.reservationDate }} at {{ reservation.startTime }} - {{ reservation.endTime }}</p>
+  <p>{{ reservation.guestCount }} guests</p>
+  <p>Table: {{ reservation.tableNumber || 'Not assigned yet' }}</p>
+  <p>Special request: {{ reservation.specialRequest || 'None' }}</p>
+  <div class="row-actions" *ngIf="reservation.status === 'PENDING' || reservation.status === 'CONFIRMED'">
+    <button class="btn danger" type="button" (click)="cancel()">Cancel</button>
+  </div>
+</section>
+<section class="card" *ngIf="reservation && (reservation.status === 'PENDING' || reservation.status === 'CONFIRMED')" style="margin-top:16px">
+  <h3>Reschedule</h3>
+  <form class="form" [formGroup]="rescheduleForm" (ngSubmit)="reschedule()">
+    <label>Date <input type="date" formControlName="reservationDate"></label>
+    <label>Time <input type="time" formControlName="startTime"></label>
+    <label>Guests <input type="number" formControlName="guestCount"></label>
+    <button class="btn secondary" type="submit">Reschedule</button>
+  </form>
+</section>
+<section class="card" *ngIf="reservation?.status === 'COMPLETED'" style="margin-top:16px">
+  <h3>Leave feedback</h3>
+  <form class="form" [formGroup]="feedbackForm" (ngSubmit)="feedback()">
+    <label>Rating
+      <select formControlName="rating">
+        <option [value]="5">5 - Excellent</option>
+        <option [value]="4">4 - Good</option>
+        <option [value]="3">3 - Okay</option>
+        <option [value]="2">2 - Poor</option>
+        <option [value]="1">1 - Bad</option>
+      </select>
+    </label>
+    <label>Comment <textarea formControlName="comment"></textarea></label>
+    <button class="btn" type="submit">Send feedback</button>
+  </form>
+</section>

@@ -1,0 +1,28 @@
+<h1 class="page-title">Users</h1>
+<form class="form" [formGroup]="form" (ngSubmit)="create()">
+  <label>Email <input formControlName="email"></label>
+  <label>Password <input type="password" formControlName="password"></label>
+  <label>Full name <input formControlName="fullName"></label>
+  <label>Phone <input formControlName="phone"></label>
+  <label>Role
+    <select formControlName="role">
+      <option value="CUSTOMER">CUSTOMER</option>
+      <option value="MANAGER">MANAGER</option>
+      <option value="ADMIN">ADMIN</option>
+    </select>
+  </label>
+  <p class="error" *ngIf="error">{{ error }}</p>
+  <button class="btn" type="submit">Create user</button>
+</form>
+<table class="table" style="margin-top:18px">
+  <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Enabled</th><th></th></tr></thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{ user.fullName }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.role }}</td>
+      <td>{{ user.enabled ? 'Yes' : 'No' }}</td>
+      <td><button class="btn ghost" type="button" (click)="toggle(user)">{{ user.enabled ? 'Disable' : 'Enable' }}</button></td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,22 @@
+<h1 class="page-title">Table configuration</h1>
+<form class="form" [formGroup]="form" (ngSubmit)="create()">
+  <label>Number <input formControlName="tableNumber"></label>
+  <label>Name <input formControlName="name"></label>
+  <label>Capacity <input type="number" formControlName="capacity"></label>
+  <label>Section <input formControlName="section"></label>
+  <p class="error" *ngIf="error">{{ error }}</p>
+  <button class="btn" type="submit">Create table</button>
+</form>
+<table class="table" style="margin-top:16px">
+  <thead><tr><th>Number</th><th>Name</th><th>Capacity</th><th>Section</th><th>Active</th><th></th></tr></thead>
+  <tbody>
+    <tr *ngFor="let table of tables">
+      <td>{{ table.tableNumber }}</td>
+      <td>{{ table.name }}</td>
+      <td>{{ table.capacity }}</td>
+      <td>{{ table.section }}</td>
+      <td>{{ table.active ? 'Yes' : 'No' }}</td>
+      <td><button class="btn ghost" type="button" (click)="toggle(table)">{{ table.active ? 'Deactivate' : 'Activate' }}</button></td>
+    </tr>
+  </tbody>
+</table>

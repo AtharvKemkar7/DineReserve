@@ -1,0 +1,10 @@
+<h1 class="page-title">Manager dashboard</h1>
+<div class="cards" *ngIf="stats">
+  <article class="card"><h3>Today</h3><p>{{ stats.todayReservations }} live bookings</p></article>
+  <article class="card"><h3>Upcoming</h3><p>{{ stats.upcomingConfirmed }}</p></article>
+  <article class="card"><h3>Pending</h3><p>{{ stats.pendingCount }}</p></article>
+  <article class="card"><h3>Completed today</h3><p>{{ stats.completedToday }}</p></article>
+  <article class="card"><h3>No-shows today</h3><p>{{ stats.noShowToday }}</p></article>
+  <article class="card"><h3>Cancelled today</h3><p>{{ stats.cancelledToday }}</p></article>
+</div>
+<p style="margin-top:16px"><a class="btn" routerLink="/manager/today">Open today's list</a></p>
